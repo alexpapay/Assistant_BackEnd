@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – Assistant</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body class="pt-0 pb-0" style="min-height: 100vh;">
+    <wrapper class="d-flex flex-column" style="min-height: 100vh;">
+        <nav class="navbar navbar-light navbar-expand-sm bg-dark">
+            <div class="container">
+                <a href="@Url.Action("Index", "Home")" class="rounded mx-auto d-block" >
+                    <img src="~/Content/0StartLogo.png" width="200" alt="Assistant"/>
+                </a>
+            </div>
+        </nav>
+        <main class="container-fluid flex-fill">
+            @RenderBody()
+        </main>
+
+        <footer class="container-fluid w-100 bg-dark text-light py-3">
+            <p align="center">&copy; @DateTime.Now.Year – Ассистент</p>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", false)
+    </wrapper>
+</body>
+</html>

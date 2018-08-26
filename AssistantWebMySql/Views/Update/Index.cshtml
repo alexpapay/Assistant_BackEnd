@@ -1,0 +1,36 @@
+﻿@using AssistantWebMySql.Models.DbSets
+@model IEnumerable<AssistantWebMySql.Models.DbSets.Update>
+@{
+    ViewBag.Title = "Список версий";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+<div>
+    <h4>Добавить новое обновление:</h4>
+    @Html.Partial("_AddUpdate", new Update() { Version = "1.0.0.x", DownLoadLink = "http://" })
+
+    <table class="table">
+        <tr>
+            <th class="text-center">@Html.DisplayNameFor(model => model.Version)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.RussianDescription)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.EnglishDescription)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.DeutschDescription)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.ChineseDescription)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.DownLoadLink)</th>
+            <th class="text-center">X</th>
+        </tr>
+        @foreach (Update item in Model)
+        {
+            <tr>
+                <td class="text-center">@Html.DisplayTextFor(modelItem => item.Version)</td>
+                <td class="text-center">@Html.DisplayTextFor(modelItem => item.RussianDescription)</td>
+                <td class="text-center">@Html.DisplayTextFor(modelItem => item.EnglishDescription)</td>
+                <td class="text-center">@Html.DisplayTextFor(modelItem => item.DeutschDescription)</td>
+                <td class="text-center">@Html.DisplayTextFor(modelItem => item.ChineseDescription)</td>
+                <td class="text-center">@Html.ActionLink("Скачать", "Download", "Update", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })</td>
+                <td class="text-center">@Html.ActionLink("X", "Delete", "Update", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })</td>
+            </tr>
+        }
+    </table>
+</div>

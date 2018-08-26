@@ -1,0 +1,60 @@
+﻿@using AssistantWebMySql.Models.DbSets
+@model List<AssistantWebMySql.Models.DbSets.RegisteredUser>
+@{
+    ViewBag.Title = "Управление пользователями";
+}
+@section Scripts {
+    @Scripts.Render("~/scripts/validate.min.js")
+}
+<h2 class="pt-5 text-center">@ViewBag.Title</h2>
+
+@Html.Partial("_AddNewUser", new RegisteredUser())
+
+<div class="container-fluid">
+    <h4 class="pt-5">Список пользователей:</h4>
+    <div class="row">
+        <table style="table-layout: fixed;word-wrap: break-word;" class="table table-striped table-responsive-sm table-responsive-md table-responsive-lg">
+            <thead class="bg-dark">
+                <tr>
+                    <th style="width: 4%" class="text-light text-center">@Html.LabelFor(model => model[0].Id)</th>
+                    <th class="text-light text-center">@Html.LabelFor(model => model[0].Name)</th>
+                    <th class="text-light text-center">@Html.LabelFor(model => model[0].Surname)</th>
+                    <th class="text-light text-center">@Html.LabelFor(model => model[0].Address)</th>
+                    <th style="width: 25%" class="text-light text-center">@Html.LabelFor(model => model[0].KeyHash)</th>
+                    <th class="text-light text-center">@Html.LabelFor(model => model[0].MacAdress)</th>
+                    <th class="text-light text-center">@Html.LabelFor(model => model[0].RegistrationDate)</th>
+                    <th class="text-light text-center">@Html.LabelFor(model => model[0].LicenseFinishDate)</th>
+                    <th style="width: 10%" class="text-light text-center"><label>Продлить до</label></th>
+                    <th class="text-light text-center"><label>Обновить</label></th>
+                    <th class="text-light text-center"><label>Удалить</label></th>
+                </tr>
+            </thead>
+            @foreach (RegisteredUser registeredUser in Model)
+            {
+                <tr class="border-bottom">
+                    @using (Html.BeginForm("Edit", "Console", new { id = registeredUser.Id }, FormMethod.Post))
+                    {
+                        <td class="text-center mt-2">@Html.DisplayTextFor(registeredUserItem => registeredUser.Id)</td>
+                        <td class="text-center mt-2">@Html.DisplayTextFor(registeredUserItem => registeredUser.Name)</td>
+                        <td class="text-center mt-2">@Html.DisplayTextFor(registeredUserItem => registeredUser.Surname)</td>
+                        <td class="text-center mt-2">@Html.DisplayTextFor(registeredUserItem => registeredUser.Address)</td>
+                        <td class="text-center mt-2">@Html.DisplayTextFor(registeredUserItem => registeredUser.KeyHash)</td>
+                        <td class="text-center mt-2">@Html.DisplayTextFor(registeredUserItem => registeredUser.MacAdress)</td>
+                        <td class="text-center mt-2">@Html.DisplayTextFor(registeredUserItem => registeredUser.RegistrationDate)</td>
+                        <td class="text-center mt-2">@Html.DisplayTextFor(registeredUserItem => registeredUser.LicenseFinishDate)</td>
+                        <td class="text-center mt-2"><input class="form-control", type="date" name="newLicenseDate"/></td>
+                        <td class="text-center mt-2">
+                            <button type="submit" class="btn btn-success">Обновить</button>
+                        </td>
+                    }
+                    @using (Html.BeginForm("Delete", "Console", new { id = registeredUser.Id }, FormMethod.Post))
+                    {
+                        <td class="text-center mt-2">
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </td>
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+</div>

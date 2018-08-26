@@ -1,0 +1,26 @@
+﻿@model AssistantWebMySql.Models.DbSets.Update
+
+@using (Html.BeginForm("Add", "Update", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th class="text-center" width="9%">@Html.DisplayNameFor(model => model.Version)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.RussianDescription)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.EnglishDescription)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.DeutschDescription)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.ChineseDescription)</th>
+            <th class="text-center">@Html.DisplayNameFor(model => model.DownLoadLink)</th>
+            <th class="text-center"></th>
+        </tr>
+        <tr>
+            <td class="text-center">@Html.TextBoxFor(x => x.Version, new { @class = "form-control" })</td>
+            <td class="text-center">@Html.TextAreaFor(x => x.RussianDescription, new { @class = "form-control" })</td>
+            <td class="text-center">@Html.TextAreaFor(x => x.EnglishDescription, new { @class = "form-control" })</td>
+            <td class="text-center">@Html.TextAreaFor(x => x.DeutschDescription, new { @class = "form-control" })</td>
+            <td class="text-center">@Html.TextAreaFor(x => x.ChineseDescription, new { @class = "form-control" })</td>
+            <td class="text-center">@Html.TextAreaFor(x => x.DownLoadLink, new { @class = "form-control" })</td>
+            <td class="text-center"><input type="submit" class="btn btn-primary" value="Добавить" /></td>
+        </tr>
+    </table>
+}
+

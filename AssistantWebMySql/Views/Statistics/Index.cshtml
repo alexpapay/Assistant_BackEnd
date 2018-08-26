@@ -1,0 +1,32 @@
+﻿@using AssistantWebMySql.Models.DbSets
+@model List<AssistantWebMySql.Models.DbSets.MonitoringValue>
+
+@{
+    ViewBag.Title = "Статистика пользования";
+}
+<h2 class="pt-5 text-center">@ViewBag.Title</h2>
+<br />
+<div class="container-fluid">
+    <div class="row justify-content-between bg-dark">
+        <div class="col-1 text-light text-center mt-2">@Html.LabelFor(model => model[0].Id)</div>
+        <div class="col-1 text-light text-center mt-2">@Html.LabelFor(model => model[0].Name)</div>
+        <div class="col-2 text-light text-center mt-2">@Html.LabelFor(model => model[0].Ip)</div>
+        <div class="col-2 text-light text-center mt-2">@Html.LabelFor(model => model[0].CountryName)</div>
+        <div class="col-2 text-light text-center mt-2">@Html.LabelFor(model => model[0].City)</div>
+        <div class="col-2 text-light text-center mt-2">@Html.LabelFor(model => model[0].MacAddress)</div>
+        <div class="col-2 text-light text-center mt-2">@Html.LabelFor(model => model[0].EventDateTime)</div>
+    </div>
+
+    @foreach (MonitoringValue monitoringValue in Model)
+    {
+        <div class="row bg-light justify-content-between border-bottom">
+            <div class="col-1 text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.Id)</div>
+            <div class="col-1 text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.Name)</div>
+            <div class="col-2 text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.Ip)</div>
+            <div class="col-2 text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.CountryName)</div>
+            <div class="col-2 text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.City)</div>
+            <div class="col-2 text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.MacAddress)</div>
+            <div class="col-2 text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.EventDateTime)</div>
+        </div>
+    }
+</div>
