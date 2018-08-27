@@ -196,12 +196,14 @@
     <Compile Include="DAL\ConsoleRepository.cs" />
     <Compile Include="DAL\HomeRepository.cs" />
     <Compile Include="DAL\StatisticsRepository.cs" />
+    <Compile Include="DAL\UpdateRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IConsoleRepository.cs" />
     <Compile Include="Interfaces\IHomeRepository.cs" />
     <Compile Include="Interfaces\IStatisticsRepository.cs" />
+    <Compile Include="Interfaces\IUpdateRepository.cs" />
     <Compile Include="MigrationsAccount\201808261012488_Initial.cs" />
     <Compile Include="MigrationsAccount\201808261012488_Initial.Designer.cs">
       <DependentUpon>201808261012488_Initial.cs</DependentUpon>
@@ -332,6 +334,7 @@
     <Content Include="Content\fonts\FontAwesome.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

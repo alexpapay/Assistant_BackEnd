@@ -1,30 +1,33 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Главная";
 }
-
-<div class="row pt-5 justify-content-around">
-    <div class="col-md-2 text-center" style="width: 18rem;">
-        <img class="card-img-top" src="~/Content/Statistics.png" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Статистика</h5>
-            <p class="card-text">Доступ к статистике использования программы.</p>
-            <a href="@Url.Action("Index", "Statistics")" class="btn btn-primary">Открыть</a>
+<div class="container">
+    <div class="row pt-5 justify-content-center">
+        <div class="col text-center" style="width: 18rem;">
+            <img class="card-img-top" src="~/Content/Statistics.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Статистика</h5>
+                <p class="card-text">Доступ к статистике использования программы.</p>
+                <a href="@Url.Action("Index", "Statistics")" class="btn btn-primary">Открыть</a>
+            </div>
+        </div>
+        <div class="col text-center" style="width: 18rem;">
+            <img class="card-img-top" src="~/Content/Console.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Консоль</h5>
+                <p class="card-text">Регистрация новых пользователей и ключей.</p>
+                <a href="@Url.Action("Index", "Console")" class="btn btn-primary">Открыть</a>
+            </div>
+        </div>
+        <div class="col text-center" style="width: 18rem;">
+            <img class="card-img-top" src="~/Content/Update.png" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">Обновление</h5>
+                <p class="card-text">Новые версии программы и текстовые данные для них.</p>
+                <a href="@Url.Action("Index", "Update")" class="btn btn-primary">Открыть</a>
+            </div>
         </div>
     </div>
-    <div class="col-md-2 text-center" style="width: 18rem;">
-        <img class="card-img-top" src="~/Content/Console.png" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Консоль</h5>
-            <p class="card-text">Регистрация новых пользователей и ключей.</p>
-            <a href="@Url.Action("Index", "Console")" class="btn btn-primary">Открыть</a>
-        </div>
-    </div>
-    <div class="col-md-2 text-center" style="width: 18rem;">
-        <img class="card-img-top" src="~/Content/Update.png" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">Обновление</h5>
-            <p class="card-text">Новые версии программы и текстовые данные для них.</p>
-            <a href="#" class="btn btn-primary">Открыть</a>
-        </div>
-    </div>
+    
+    <a href="@Url.Action("Logout", "Account")" class="mt-5 mb-5 col btn btn-outline-secondary">Выйти из аккаунта @User.Identity.Name</a>
 </div>

@@ -5,7 +5,7 @@ namespace AssistantWebMySql.Models.DbSets
     public class Update
     {
         [Key]
-        [Display(Name = "№")]
+        [Display(Name = "№, пп")]
         public int Id { get; set; }
 
         [Display(Name = "Версия")]
@@ -23,7 +23,7 @@ namespace AssistantWebMySql.Models.DbSets
         [Display(Name = "Китайский")]
         public string ChineseDescription { get; set; }
 
-        [Display(Name = "Скачать")]
+        [Display(Name = "Ссылка на скачивание")]
         public string DownLoadLink { get; set; }
     }
 

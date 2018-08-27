@@ -1,15 +1,15 @@
 ﻿@using AssistantWebMySql.Models.DbSets
-@model IEnumerable<AssistantWebMySql.Models.DbSets.Update>
+@model IEnumerable<Update>
 @{
     ViewBag.Title = "Список версий";
 }
 
-<h2>@ViewBag.Title</h2>
-<br />
-<div>
-    <h4>Добавить новое обновление:</h4>
-    @Html.Partial("_AddUpdate", new Update() { Version = "1.0.0.x", DownLoadLink = "http://" })
+<h2 class="pt-5 text-center">@ViewBag.Title</h2>
 
+@Html.Partial("_AddUpdate", new Update { Version = "1.0.0.x", DownLoadLink = "http://" })
+
+<div class="container-fluid">
+    <h4 class="pt-5">Доступные версии:</h4>
     <table class="table">
         <tr>
             <th class="text-center">@Html.DisplayNameFor(model => model.Version)</th>
@@ -18,7 +18,7 @@
             <th class="text-center">@Html.DisplayNameFor(model => model.DeutschDescription)</th>
             <th class="text-center">@Html.DisplayNameFor(model => model.ChineseDescription)</th>
             <th class="text-center">@Html.DisplayNameFor(model => model.DownLoadLink)</th>
-            <th class="text-center">X</th>
+            <th class="text-center">Удалить</th>
         </tr>
         @foreach (Update item in Model)
         {
@@ -28,8 +28,11 @@
                 <td class="text-center">@Html.DisplayTextFor(modelItem => item.EnglishDescription)</td>
                 <td class="text-center">@Html.DisplayTextFor(modelItem => item.DeutschDescription)</td>
                 <td class="text-center">@Html.DisplayTextFor(modelItem => item.ChineseDescription)</td>
-                <td class="text-center">@Html.ActionLink("Скачать", "Download", "Update", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })</td>
-                <td class="text-center">@Html.ActionLink("X", "Delete", "Update", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })</td>
+                <td class="text-center">@Html.ActionLink("Скачать", "Download", "Update", new {id = item.Id}, new {@class = "btn btn-info"})</td>
+                @using (Html.BeginForm("Delete", "Update", new { id = item.Id }, FormMethod.Post))
+                {
+                    <td class="text-center"><button type="submit" class="btn btn-danger">Удалить</button></td>
+                }
             </tr>
         }
     </table>

@@ -1,26 +1,62 @@
 ﻿@model AssistantWebMySql.Models.DbSets.Update
 
-@using (Html.BeginForm("Add", "Update", FormMethod.Post))
-{
-    <table class="table">
-        <tr>
-            <th class="text-center" width="9%">@Html.DisplayNameFor(model => model.Version)</th>
-            <th class="text-center">@Html.DisplayNameFor(model => model.RussianDescription)</th>
-            <th class="text-center">@Html.DisplayNameFor(model => model.EnglishDescription)</th>
-            <th class="text-center">@Html.DisplayNameFor(model => model.DeutschDescription)</th>
-            <th class="text-center">@Html.DisplayNameFor(model => model.ChineseDescription)</th>
-            <th class="text-center">@Html.DisplayNameFor(model => model.DownLoadLink)</th>
-            <th class="text-center"></th>
-        </tr>
-        <tr>
-            <td class="text-center">@Html.TextBoxFor(x => x.Version, new { @class = "form-control" })</td>
-            <td class="text-center">@Html.TextAreaFor(x => x.RussianDescription, new { @class = "form-control" })</td>
-            <td class="text-center">@Html.TextAreaFor(x => x.EnglishDescription, new { @class = "form-control" })</td>
-            <td class="text-center">@Html.TextAreaFor(x => x.DeutschDescription, new { @class = "form-control" })</td>
-            <td class="text-center">@Html.TextAreaFor(x => x.ChineseDescription, new { @class = "form-control" })</td>
-            <td class="text-center">@Html.TextAreaFor(x => x.DownLoadLink, new { @class = "form-control" })</td>
-            <td class="text-center"><input type="submit" class="btn btn-primary" value="Добавить" /></td>
-        </tr>
-    </table>
-}
 
+<div class="container">
+    <h4 class="pt-5">Добавить новую версию:</h4>
+    @using (Html.BeginForm("Add", "Update", FormMethod.Post))
+    {
+        <div class="row justify-content-around bg-light border-top pb-2">
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@Html.DisplayNameFor(model => model.Version)</span>
+                </div>
+                @Html.TextBoxFor(model => model.Version, new { @class = "col form-control" })
+            </div>
+        </div>
+        <div class="row justify-content-around bg-light pb-2">
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@Html.DisplayNameFor(model => model.RussianDescription)</span>
+                </div>
+                @Html.TextArea("RussianDescription", new { @class = "col form-control" })
+            </div>
+        </div>
+        <div class="row justify-content-around bg-light pb-2">
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="col input-group-text">@Html.DisplayNameFor(model => model.EnglishDescription)</span>
+                </div>
+                @Html.TextArea("EnglishDescription", new { @class = "col form-control" })
+            </div>
+        </div>
+        <div class="row justify-content-around bg-light pb-2">
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@Html.DisplayNameFor(model => model.DeutschDescription)</span>
+                </div>
+                @Html.TextArea("DeutschDescription", new { @class = "col form-control" })
+            </div>
+        </div>
+        <div class="row justify-content-around bg-light pb-2">
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@Html.DisplayNameFor(model => model.ChineseDescription)</span>
+                </div>
+                @Html.TextArea("ChineseDescription", new { @class = "col form-control" })
+            </div>
+        </div>
+        <div class="row justify-content-around bg-light border-bottom pb-2">
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="col input-group-text">@Html.DisplayNameFor(model => model.DownLoadLink)</span>
+                </div>
+                @Html.TextBoxFor(model => model.DownLoadLink, new { @class = "col form-control" })
+            </div>
+        </div>
+        <div class="row justify-content-around pb-2">
+            <div class="col input-group mt-2">
+                <input type="submit" class="col btn btn-success" value="Добавить новую версию"/>
+            </div>
+        </div>
+    }
+</div>

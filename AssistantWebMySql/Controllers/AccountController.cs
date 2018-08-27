@@ -64,32 +64,32 @@ namespace AssistantWebMySql.Controllers
         }
 
         // GET: Account/Register
-        public ActionResult Register()
-        {
-            return View();
-        }
+        //public ActionResult Register()
+        //{
+        //    return View();
+        //}
 
         // POST: Account/Register
-        [HttpPost]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+        //[HttpPost]
+        //public async Task<ActionResult> Register(RegisterViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+        //        IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-                if (result.Succeeded)
-                {
-                    return RedirectToAction("Login", "Account");
-                }
+        //        if (result.Succeeded)
+        //        {
+        //            return RedirectToAction("Login", "Account");
+        //        }
 
-                foreach (string error in result.Errors)
-                {
-                    ModelState.AddModelError("", error);
-                }
-            }
+        //        foreach (string error in result.Errors)
+        //        {
+        //            ModelState.AddModelError("", error);
+        //        }
+        //    }
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
     }
 }

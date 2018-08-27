@@ -1,18 +1,51 @@
 ﻿@model AssistantWebMySql.Models.DbSets.RegisteredUser
 
-<div class="container-fluid">
+<div class="container">
     <h4 class="pt-5">Добавить нового пользователя:</h4>
     @using (Html.BeginForm("Create", "Console", FormMethod.Post))
     {
-        <div class="row justify-content-between bg-light border-bottom pb-2">
-            <div class="col-2 text-center mt-2">@Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder="Имя"})</div>
-            <div class="col-2 text-center mt-2">@Html.TextBoxFor(model => model.Surname, new { @class = "form-control", placeholder = "Фамилия" })</div>
-            <div class="col-2 text-center mt-2">@Html.TextBoxFor(model => model.Address, new { @class = "form-control", type = "email", placeholder = "Электронная почта" })</div>
-            <div class="col-2 text-center mt-2">@Html.TextBoxFor(model => model.MacAdress, new { @class = "form-control", placeholder = "MAC-адрес" })</div>
-            <div class="col-2 text-center mt-2">@Html.TextBoxFor(model => model.LicenseFinishDate, new { @class = "form-control", type = "date"})</div>
-            <div class="col-2 text-center mt-2">
-                <button type="submit" class="btn btn-success form-control" id="btnLogin">Добавить</button>
+        <div class="row justify-content-around bg-light border-top pb-2">
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@Html.DisplayNameFor(model => model.Name)</span>
+                </div>
+                @Html.TextBoxFor(model => model.Name, new { @class = "col form-control" })
+            </div>
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@Html.DisplayNameFor(model => model.Surname)</span>
+                </div>
+                @Html.TextBoxFor(model => model.Surname, new { @class = "col form-control" })
+            </div>
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@Html.DisplayNameFor(model => model.Company)</span>
+                </div>
+                @Html.TextBoxFor(model => model.Company, new { @class = "col form-control" })
             </div>
         </div>
+
+        <div class="row justify-content-around bg-light border-bottom pb-2">
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Эл. почта</span>
+                </div>
+                @Html.TextBoxFor(model => model.Address, new { @class = "col form-control" })
+            </div>
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@Html.DisplayNameFor(model => model.MacAdress)</span>
+                </div>
+                @Html.TextBoxFor(model => model.Address, new { @class = "col form-control" })
+            </div>
+            <div class="col input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@Html.DisplayNameFor(model => model.LicenseFinishDate)</span>
+                </div>
+                @Html.TextBoxFor(model => model.LicenseFinishDate, new { @class = "col form-control", type = "date" })
+            </div>
+        </div>
+
+        <button type="submit" class="col btn btn-success form-control mt-2" id="btnLogin">Добавить</button>
     }
 </div>

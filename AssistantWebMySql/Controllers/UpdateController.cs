@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Mvc;
+using AssistantWebMySql.DAL;
+using AssistantWebMySql.Interfaces;
 using AssistantWebMySql.Models;
 using AssistantWebMySql.Models.DbSets;
 
@@ -10,90 +9,75 @@ namespace AssistantWebMySql.Controllers
 {
     public class UpdateController : Controller
     {
-        // GET: Update
-        public ActionResult Index()
+        private readonly IUpdateRepository _updateRepository;
+
+        public UpdateController()
         {
-            List<Update> updateModel;
-            using (var db = new AssistantContext())
-            {
-                updateModel = db.Updates.Where(x => x.Id != 0).ToList();
-            }
-            return View(updateModel);
+            _updateRepository = new UpdateRepository(new AssistantContext());
         }
 
+        // GET: Update/Index
+        public ActionResult Index()
+        {
+            return User.Identity.IsAuthenticated ?
+                (ActionResult)View(_updateRepository.GetAllUpdates()) : RedirectToAction("Login", "Account");
+        }
+
+        // POST: Update/Add
+        [System.Web.Mvc.HttpPost]
         public ActionResult Add(Update updateData)
         {
             if (updateData == null)
-                return RedirectToAction("Index");
-            using (var db = new AssistantContext())
-            {
-                db.Updates.Add(updateData);
-                db.SaveChanges();
-            }
+                return View("Error");
+
+            if (!User.Identity.IsAuthenticated)
+                return View("Error");
+
+            _updateRepository.AddNew(updateData);
+
             return RedirectToAction("Index");
         }
 
+        // POST: Update/Delete/7
+        [System.Web.Mvc.HttpPost]
         public ActionResult Delete(int? id)
         {
             if (id == null)
-                return RedirectToAction("Index");
-            using (var db = new AssistantContext())
-            {
-                var updateForDelete = db.Updates.FirstOrDefault(x => x.Id == id);
-                db.Updates.Remove(updateForDelete ?? throw new InvalidOperationException());
-                db.SaveChanges();
-            }
+                return View("Error");
+
+            if (!User.Identity.IsAuthenticated)
+                return View("Error");
+
+            _updateRepository.Delete(id.Value);
+
             return RedirectToAction("Index");
         }
 
+        // GET: Update/Download/7
         public ActionResult Download(int? id)
         {
             if (id == null)
                 return RedirectToAction("Index");
 
-            using (var db = new AssistantContext())
-            {
-                var updateForDownload = db.Updates.FirstOrDefault(x => x.Id == id);
+            if (!User.Identity.IsAuthenticated)
+                return View("Error");
 
-                if (updateForDownload != null)
-                    return Redirect(updateForDownload.DownLoadLink);
-            }
-            return RedirectToAction("Index");
+            string downloadLink = _updateRepository.GetDownloadLink(id.Value);
+
+            return string.IsNullOrEmpty(downloadLink) ?
+                (ActionResult)View("Error") : Redirect(downloadLink);
         }
 
+        // GET: Update/CheckVersion
         public JsonResult CheckVersion([FromBody] UpdateJson checkVersion)
         {
             if (checkVersion == null)
                 return null;
 
-            using (var db = new AssistantContext())
-            {
-                List<Update> lastVersionList = db.Updates.Where(x => x.Id != 0).ToList();
-                if (!lastVersionList.Any())
-                    return null;
+            UpdateJson updateJson = _updateRepository.GetUpdateJson(checkVersion);
 
-                var lastVersion = lastVersionList.LastOrDefault();
-
-                if (lastVersion != null && lastVersion.Version == checkVersion.Version)
-                    return null;
-
-                string descriptionText;
-                switch (checkVersion.Language)
-                {
-                    case 0: descriptionText = lastVersion.RussianDescription; break;
-                    case 1: descriptionText = lastVersion.EnglishDescription; break;
-                    case 2: descriptionText = lastVersion.DeutschDescription; break;
-                    case 3: descriptionText = lastVersion.ChineseDescription; break;
-                    default: descriptionText = lastVersion.RussianDescription; break;
-                }
-                return Json(new UpdateJson
-                {
-                    Version = lastVersion.Version,
-                    Description = descriptionText,
-                    DownLoadLink = lastVersion.DownLoadLink
-                },
-                    JsonRequestBehavior.AllowGet);
-            }
+            return updateJson != null ? 
+                Json(updateJson,JsonRequestBehavior.AllowGet) : null;
         }
     }
 }

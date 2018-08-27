@@ -27,7 +27,8 @@ namespace AssistantWebMySql.Controllers
         public ActionResult Monitoring(MonitoringValue monitoringValue)
         {
             _statisticsRepository.Add(monitoringValue);
-            return View("Index");
+
+            return null;
         }
     }
 }
