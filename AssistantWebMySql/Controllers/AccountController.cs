@@ -1,7 +1,13 @@
-﻿using System.Security.Claims;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using AssistantWebMySql.DAL;
+using AssistantWebMySql.Interfaces;
+using AssistantWebMySql.Migrations;
+using AssistantWebMySql.Models;
 using AssistantWebMySql.Models.Accounts;
 using AssistantWebMySql.Models.ViewModels;
 using Microsoft.AspNet.Identity;
@@ -14,6 +20,20 @@ namespace AssistantWebMySql.Controllers
     {
         private ApplicationUserManager UserManager => HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
         private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
+
+        private readonly IAccountRepository _accountRepository;
+
+        public AccountController()
+        {
+            _accountRepository = new AccountRepository();
+        }
+
+        // GET: /Account/Index
+        public ActionResult Index()
+        {
+            return User.Identity.IsAuthenticated ?
+                (ActionResult)View(_accountRepository.GetAllUsers()) : RedirectToAction("Login", "Account");
+        }
 
         // GET: /Account/Login
         public ActionResult Login(string returnUrl)
@@ -64,32 +84,36 @@ namespace AssistantWebMySql.Controllers
         }
 
         // GET: Account/Register
-        //public ActionResult Register()
-        //{
-        //    return View();
-        //}
+        public ActionResult Register()
+        {
+            return User.Identity.IsAuthenticated ?
+                (ActionResult)View() : RedirectToAction("Login", "Account");
+        }
 
         // POST: Account/Register
-        //[HttpPost]
-        //public async Task<ActionResult> Register(RegisterViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-        //        IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+        [HttpPost]
+        public async Task<ActionResult> Register(RegisterViewModel model)
+        {
+            if (!User.Identity.IsAuthenticated)
+                View("Error");
 
-        //        if (result.Succeeded)
-        //        {
-        //            return RedirectToAction("Login", "Account");
-        //        }
+            if (ModelState.IsValid)
+            {
+                ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-        //        foreach (string error in result.Errors)
-        //        {
-        //            ModelState.AddModelError("", error);
-        //        }
-        //    }
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
 
-        //    return View(model);
-        //}
+                foreach (string error in result.Errors)
+                {
+                    ModelState.AddModelError("", error);
+                }
+            }
+
+            return View(model);
+        }
     }
 }

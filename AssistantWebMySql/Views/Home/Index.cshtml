@@ -1,10 +1,11 @@
 ﻿@{
     ViewBag.Title = "Главная";
 }
+
 <div class="container">
     <div class="row pt-5 justify-content-center">
         <div class="col text-center" style="width: 18rem;">
-            <img class="card-img-top" src="~/Content/Statistics.png" alt="Card image cap">
+            <img src="~/Content/Statistics.png" width="150" alt="Statistics">
             <div class="card-body">
                 <h5 class="card-title">Статистика</h5>
                 <p class="card-text">Доступ к статистике использования программы.</p>
@@ -12,7 +13,7 @@
             </div>
         </div>
         <div class="col text-center" style="width: 18rem;">
-            <img class="card-img-top" src="~/Content/Console.png" alt="Card image cap">
+            <img src="~/Content/Console.png" width="150" alt="Console">
             <div class="card-body">
                 <h5 class="card-title">Консоль</h5>
                 <p class="card-text">Регистрация новых пользователей и ключей.</p>
@@ -20,11 +21,19 @@
             </div>
         </div>
         <div class="col text-center" style="width: 18rem;">
-            <img class="card-img-top" src="~/Content/Update.png" alt="Card image cap">
+            <img src="~/Content/Update.png" width="150" alt="Update">
             <div class="card-body">
                 <h5 class="card-title">Обновление</h5>
                 <p class="card-text">Новые версии программы и текстовые данные для них.</p>
                 <a href="@Url.Action("Index", "Update")" class="btn btn-primary">Открыть</a>
+            </div>
+        </div>
+        <div class="col text-center" style="width: 18rem;">
+            <img src="~/Content/Users.png" width="150" alt="Update">
+            <div class="card-body">
+                <h5 class="card-title">Пользователи API.</h5>
+                <p class="card-text">Просмотр пользователей, имеющих доступ к API.</p>
+                <a href="@Url.Action("Index", "Account")" class="btn btn-primary">Открыть</a>
             </div>
         </div>
     </div>

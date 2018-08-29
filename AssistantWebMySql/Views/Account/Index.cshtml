@@ -1,0 +1,29 @@
+﻿@using AssistantWebMySql.Models.Accounts
+@using AssistantWebMySql.Models.ViewModels
+@model List<ApplicationUser>
+@{
+    ViewBag.Title = "Пользователи API";
+}
+
+@Html.Partial("Register", new RegisterViewModel())
+
+<h2 class="pt-5 text-center">@ViewBag.Title</h2>
+<br />
+<div class="container-fluid pb-5">
+    <div class="row justify-content-between bg-dark">
+        <div class="col text-light text-center mt-2">@Html.LabelFor(model => model[0].Id)</div>
+        <div class="col text-light text-center mt-2">@Html.LabelFor(model => model[0].UserName)</div>
+        <div class="col text-light text-center mt-2">@Html.LabelFor(model => model[0].Email)</div>
+    </div>
+
+    @foreach (ApplicationUser monitoringValue in Model)
+    {
+        <div class="row bg-light justify-content-between border-bottom">
+            <div class="col text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.Id)</div>
+            <div class="col text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.UserName)</div>
+            <div class="col text-center mt-2 mb-2">@Html.DisplayTextFor(monitoringValueItem => monitoringValue.Email)</div>
+        </div>
+    }
+</div>
+
+

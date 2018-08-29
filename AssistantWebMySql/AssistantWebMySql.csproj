@@ -193,6 +193,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\UpdateController.cs" />
+    <Compile Include="DAL\AccountRepository.cs" />
     <Compile Include="DAL\ConsoleRepository.cs" />
     <Compile Include="DAL\HomeRepository.cs" />
     <Compile Include="DAL\StatisticsRepository.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\IConsoleRepository.cs" />
     <Compile Include="Interfaces\IHomeRepository.cs" />
     <Compile Include="Interfaces\IStatisticsRepository.cs" />
@@ -277,6 +279,7 @@
     <Content Include="Content\bootstrap.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Users.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css">
@@ -388,6 +391,7 @@
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Console\Index.cshtml" />
     <Content Include="Views\Console\_AddNewUser.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
